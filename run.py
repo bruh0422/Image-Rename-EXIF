@@ -18,35 +18,35 @@ index = 1
 total = len(os.listdir(folder_path))
 
 for photo in os.listdir(folder_path):
-    print(f'({index} / {total}) ', end='')
+    try:
+        print(f'({index} / {total}) ', end='')
 
-    photo_path = os.path.join(folder_path, photo)
+        photo_path = os.path.join(folder_path, photo)
+        if not os.path.isfile(photo_path): raise TypeError
 
-    if os.path.isfile(photo_path):
         basename, ext = os.path.splitext(photo)
 
-        try:
-            exif_time = get_photo_exif(photo_path).get(306, None)
+        exif_time = get_photo_exif(photo_path).get(306, None)
 
-            if exif_time is not None:
-                new_basename = datetime.datetime.strptime(str(exif_time), "%Y:%m:%d %H:%M:%S").strftime("%Y-%m-%d %H-%M-%S")
+        if exif_time is not None:
+            new_basename = datetime.datetime.strptime(str(exif_time), "%Y:%m:%d %H:%M:%S").strftime("%Y-%m-%d %H-%M-%S")
 
-                if os.path.exists(os.path.join(folder_path, f'{new_basename}{ext}')):
-                    suffix = 1
+            if os.path.exists(os.path.join(folder_path, f'{new_basename}{ext}')):
+                suffix = 1
 
-                    while os.path.exists(os.path.join(folder_path, f'{basename}_{suffix:02}{ext}')):
-                        suffix += 1
+                while os.path.exists(os.path.join(folder_path, f'{basename}_{suffix:02}{ext}')):
+                    suffix += 1
 
-                    new_basename = datetime.datetime.strptime(str(exif_time), "%Y:%m:%d %H:%M:%S").strftime("%Y-%m-%d %H-%M-%S") + f'_{suffix:02}'
+                new_basename = datetime.datetime.strptime(str(exif_time), "%Y:%m:%d %H:%M:%S").strftime("%Y-%m-%d %H-%M-%S") + f'_{suffix:02}'
 
-                new = os.path.join(folder_path, f'{new_basename}{ext}')
+            new = os.path.join(folder_path, f'{new_basename}{ext}')
 
-                os.rename(photo_path, new)
+            os.rename(photo_path, new)
 
-                print(f'{photo_path} -> {new}。')
-        except Exception as e:
-            print(f'未知錯誤 - ({e})')
-    else:
+            print(f'{photo_path} -> {new}。')
+    except TypeError:
         print(f'{photo_path} 並非一個檔案。')
+    except Exception as e:
+        print(f'未知錯誤 - ({e})')
 
     index += 1
