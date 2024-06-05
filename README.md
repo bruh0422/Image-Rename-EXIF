@@ -11,6 +11,11 @@ git clone https://github.com/bruh0422/Photo-Rename-EXIF.git
 cd Photo-Rename-EXIF
 ```
 
+### 安裝必要檔案
+```bash
+pip install -r requirements.txt
+```
+
 ## 開始使用
 ```bash
 python run.py
