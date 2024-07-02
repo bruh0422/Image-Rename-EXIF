@@ -7,8 +7,8 @@
 ## 前置作業
 ### 複製儲存庫
 ```bash
-git clone https://github.com/bruh0422/Photo-Rename-EXIF.git
-cd Photo-Rename-EXIF
+git clone https://github.com/bruh0422/Image-Rename-EXIF.git
+cd Image-Rename-EXIF
 ```
 
 ### 安裝必要檔案
