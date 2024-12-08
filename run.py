@@ -34,7 +34,7 @@ for image in os.listdir(folder_path):
             if os.path.exists(os.path.join(folder_path, f'{new_basename}{ext}')):
                 suffix = 1
 
-                while os.path.exists(os.path.join(folder_path, f'{basename}_{suffix:02}{ext}')):
+                while os.path.exists(os.path.join(folder_path, f'{new_basename}_{suffix:02}{ext}')):
                     suffix += 1
 
                 new_basename = datetime.datetime.strptime(str(exif_time), "%Y:%m:%d %H:%M:%S").strftime("%Y-%m-%d %H-%M-%S") + f'_{suffix:02}'
